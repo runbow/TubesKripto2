@@ -23,7 +23,7 @@ namespace TubesKripto2
         private static Point G = new Point(15, 19); //basis point
 
 
-        Point publicKey;
+        Point publicKey = new Point(BigInteger.Zero,BigInteger.Zero);
 
         internal Point PublicKey
         {

@@ -18,14 +18,15 @@ namespace TubesKripto2
             InitializeComponent();
         }
 
-        mainECDSA mECDSA;
+        mainECDSA mECDSA = new mainECDSA();
+        
         static string md = "2F82D0C845121B953D57E4C3C5E91E63";
 
         private void enableSignatureCheck_CheckedChanged(object sender, EventArgs e)
         {
             if (enableSignatureCheck.Checked)
             {
-                mECDSA = new mainECDSA();
+                
                 generateSignaturePair.Enabled = true;
 
             }
@@ -55,6 +56,7 @@ namespace TubesKripto2
             }
             else
             {
+                mECDSA.Privatekey = BigInteger.Parse(privateKeyBox.Text);
                 mECDSA.generatePublicKey();
                 publicKeyXBox.Text = mECDSA.PublicKey.getX().ToString();
                 publicKeyYBox.Text = mECDSA.PublicKey.getY().ToString();
@@ -69,8 +71,15 @@ namespace TubesKripto2
 
         private void verifySignature_Click(object sender, EventArgs e)
         {
+            mECDSA.MsgDigest = md;
+            mECDSA.DecMsgDigest = mECDSA.mdToDecimal(md);
+
             mECDSA.R = BigInteger.Parse(rBox.Text);
             mECDSA.S = BigInteger.Parse(sBox.Text);
+
+            mECDSA.PublicKey.X = BigInteger.Parse(publicKeyXBox.Text);
+            mECDSA.PublicKey.Y = BigInteger.Parse(publicKeyYBox.Text);
+
             if (mECDSA.verifySignature())
             {
                 MessageBox.Show("Signature Valid");
@@ -80,5 +89,21 @@ namespace TubesKripto2
                 MessageBox.Show("Siganture Invalid");
             }
         }
+
+        private void privateKeyBox_focusLeave(object sender, EventArgs e)
+        {
+            mECDSA.Privatekey = BigInteger.Parse(privateKeyBox.Text);
+        }
+
+        private void publicKeyXBox_focusLeave(object sender, EventArgs e)
+        {
+            mECDSA.PublicKey.X = BigInteger.Parse(publicKeyXBox.Text);
+        }
+
+        private void publicKeyYBox_focusLeave(object sender, EventArgs e)
+        {
+            mECDSA.PublicKey.Y = BigInteger.Parse(publicKeyYBox.Text);
+        }
+
     }
 }

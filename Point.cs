@@ -9,7 +9,19 @@ namespace TubesKripto2
     class Point
     {
         BigInteger x;
+
+        public BigInteger X
+        {
+            
+            set { x = value; }
+        }
         BigInteger y;
+
+        public BigInteger Y
+        {
+            
+            set { y = value; }
+        }
 
         public Point(BigInteger x, BigInteger y)
         {
