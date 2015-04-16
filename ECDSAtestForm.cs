@@ -40,6 +40,9 @@ namespace TubesKripto2
         {
             mECDSA.MsgDigest = md;
             mECDSA.DecMsgDigest = mECDSA.mdToDecimal(md);
+
+            mECDSA.Privatekey = BigInteger.Parse(privateKeyBox.Text);
+
             mECDSA.generateSignature();
 
             rBox.Text = mECDSA.R.ToString();
