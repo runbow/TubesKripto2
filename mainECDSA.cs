@@ -56,6 +56,8 @@ namespace ECDSAlgo
 
         BigInteger decMsgDigest;
 
+        // decMsgDigest = BigInteger.Parse(MsgDigest , System.Globalization.NumberStyles.HexNumber);
+
         public BigInteger DecMsgDigest
         {
             get { return decMsgDigest; }
@@ -69,7 +71,7 @@ namespace ECDSAlgo
             ec = new EllipticCurve(15, 2567, 2903);
         }
 
-        public void generateSignature(BigInteger privatekey, BigInteger decMsgDigest)
+        public void generateSignature()
         {
 
 
@@ -84,7 +86,7 @@ namespace ECDSAlgo
                 goto getRandomk;
             }
 
-            s = BigInteger.Multiply(ec.modInverse(k, n), ec.mod(BigInteger.Add(decMsgDigest, BigInteger.Multiply(privatekey, r)), n));
+            s = BigInteger.Multiply(ec.modInverse(k, n), ec.mod(BigInteger.Add(this.decMsgDigest, BigInteger.Multiply(this.privatekey, r)), n));
 
             if (s.Equals(BigInteger.Zero))
             {
@@ -93,18 +95,18 @@ namespace ECDSAlgo
 
         }
 
-        public bool verifySignature(BigInteger r, BigInteger s, Point Q)
+        public bool verifySignature()
         {
-            if ((r >= 1 && r <= 2817) || (s >= 1 && s <= 2817))
+            if ((this.r >= 1 && this.r <= 2817) || (this.s >= 1 && this.s <= 2817))
             {
                 return false;
             }
 
-            BigInteger w = ec.modInverse(s, n);
+            BigInteger w = ec.modInverse(this.s, n);
             BigInteger u1 = ec.mod(BigInteger.Multiply(decMsgDigest, w), n);
-            BigInteger u2 = ec.mod(BigInteger.Multiply(r, w), n);
-            Point p = ec.addPoint(ec.multiplyPoint(G, u1), ec.multiplyPoint(Q, u2));
-            if (p.getX().Equals(ec.mod(r, n)))
+            BigInteger u2 = ec.mod(BigInteger.Multiply(this.r, w), n);
+            Point p = ec.addPoint(ec.multiplyPoint(G, u1), ec.multiplyPoint(this.Q, u2));
+            if (p.getX().Equals(ec.mod(this.r, n)))
             {
                 return true;
             }
