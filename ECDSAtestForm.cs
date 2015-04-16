@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Numerics;
 
+
 namespace TubesKripto2
 {
     public partial class ECDSAtestForm : Form
@@ -20,16 +21,9 @@ namespace TubesKripto2
         mainECDSA mECDSA;
         static string md = "2F82D0C845121B953D57E4C3C5E91E63";
 
-        private void button1_Click(object sender, EventArgs e)
+        private void enableSignatureCheck_CheckedChanged(object sender, EventArgs e)
         {
-            mECDSA.generatePrivateKey();
-            privateKeyBox.Text = mECDSA.Privatekey.ToString();
-
-        }
-
-        private void enableSignature_CheckedChanged(object sender, EventArgs e)
-        {
-            if (enableSignature.Checked)
+            if (enableSignatureCheck.Checked)
             {
                 mECDSA = new mainECDSA();
                 generateSignaturePair.Enabled = true;
@@ -51,7 +45,6 @@ namespace TubesKripto2
             sBox.Text = mECDSA.S.ToString();
 
             //simpan nilai pada field ke dalam sistem
-            
         }
 
         private void generatePublicKey_Click(object sender, EventArgs e)
@@ -66,7 +59,12 @@ namespace TubesKripto2
                 publicKeyXBox.Text = mECDSA.PublicKey.getX().ToString();
                 publicKeyYBox.Text = mECDSA.PublicKey.getY().ToString();
             }
-            
+        }
+
+        private void generatePrivateKey_Click(object sender, EventArgs e)
+        {
+            mECDSA.generatePrivateKey();
+            privateKeyBox.Text = mECDSA.Privatekey.ToString();
         }
 
         private void verifySignature_Click(object sender, EventArgs e)

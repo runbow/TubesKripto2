@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Numerics;
 
 namespace TubesKripto2
@@ -60,14 +59,14 @@ namespace TubesKripto2
 
         public BigInteger mod(BigInteger a, BigInteger b)
         {
-            
+
             BigInteger result = a % b;
             return (result.Sign >= 0 ? result : BigInteger.Add(result, b));
         }
 
         public Point invers(Point p)
         {
-            return new Point(p.getX(), mod(BigInteger.Negate(p.getY()),this.p));
+            return new Point(p.getX(), mod(BigInteger.Negate(p.getY()), this.p));
         }
 
         public Point substractPoint(Point p1, Point p2)
@@ -90,7 +89,7 @@ namespace TubesKripto2
 
             if (!p1.getX().Equals(p2.getX()))
             {
-                gradient = mod( BigInteger.Multiply(mod(BigInteger.Subtract(p1.getY(), p2.getY()) , this.p), modInverse(mod(BigInteger.Subtract(p1.getX(), p2.getX()) , this.p), this.p)) , this.p);
+                gradient = mod(BigInteger.Multiply(mod(BigInteger.Subtract(p1.getY(), p2.getY()), this.p), modInverse(mod(BigInteger.Subtract(p1.getX(), p2.getX()), this.p), this.p)), this.p);
             }
             else if (!p1.getY().Equals(p2.getY()))
             {
@@ -101,9 +100,9 @@ namespace TubesKripto2
                 return doublePoint(p1);
             }
 
-            BigInteger xr = mod(BigInteger.Subtract(BigInteger.Subtract(mod(BigInteger.Multiply(gradient, gradient) , this.p), p1.getX()), p2.getX()) , this.p);
+            BigInteger xr = mod(BigInteger.Subtract(BigInteger.Subtract(mod(BigInteger.Multiply(gradient, gradient), this.p), p1.getX()), p2.getX()), this.p);
 
-            BigInteger yr = mod(BigInteger.Subtract(mod(BigInteger.Multiply(BigInteger.Subtract(p2.getX(), xr), gradient) , this.p), p2.getY()) , this.p);
+            BigInteger yr = mod(BigInteger.Subtract(mod(BigInteger.Multiply(BigInteger.Subtract(p2.getX(), xr), gradient), this.p), p2.getY()), this.p);
 
             return new Point(xr, yr);
         }
@@ -117,13 +116,13 @@ namespace TubesKripto2
 
             BigInteger gradient;
 
-            BigInteger x1sqr = mod(BigInteger.Multiply(p.getX(), p.getX()) , this.p);
+            BigInteger x1sqr = mod(BigInteger.Multiply(p.getX(), p.getX()), this.p);
             BigInteger inv2y1 = modInverse(BigInteger.Add(p.getY(), p.getY()), this.p);
-            gradient = mod(BigInteger.Multiply(BigInteger.Add(BigInteger.Add(BigInteger.Add(x1sqr, x1sqr), x1sqr), this.a), inv2y1) , this.p);
+            gradient = mod(BigInteger.Multiply(BigInteger.Add(BigInteger.Add(BigInteger.Add(x1sqr, x1sqr), x1sqr), this.a), inv2y1), this.p);
 
-            BigInteger xr = mod(BigInteger.Subtract(BigInteger.Subtract(mod(BigInteger.Multiply(gradient, gradient) , this.p), p.getX()), p.getX()) , this.p);
-            BigInteger yr = mod(BigInteger.Subtract(mod(BigInteger.Multiply(BigInteger.Subtract(p.getX(), xr), gradient) , this.p), p.getY()) , this.p);
-            
+            BigInteger xr = mod(BigInteger.Subtract(BigInteger.Subtract(mod(BigInteger.Multiply(gradient, gradient), this.p), p.getX()), p.getX()), this.p);
+            BigInteger yr = mod(BigInteger.Subtract(mod(BigInteger.Multiply(BigInteger.Subtract(p.getX(), xr), gradient), this.p), p.getY()), this.p);
+
             return new Point(xr, yr);
         }
 
@@ -144,10 +143,8 @@ namespace TubesKripto2
             }
             else
             {
-                return multiplyPoint(doublePoint(p), BigInteger.Divide(k,TWO));
+                return multiplyPoint(doublePoint(p), BigInteger.Divide(k, TWO));
             }
         }
-
-        
     }
 }

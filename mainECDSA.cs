@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Numerics;
 
 namespace TubesKripto2
@@ -22,7 +21,7 @@ namespace TubesKripto2
         BigInteger n; // elliptic curve order
         EllipticCurve ec;
         private static Point G = new Point(15, 19); //basis point
-        
+
 
         Point publicKey;
 
@@ -91,7 +90,7 @@ namespace TubesKripto2
                 goto getRandomk;
             }
 
-            s = ec.mod(BigInteger.Multiply(ec.modInverse(k, n), ec.mod(BigInteger.Add(this.decMsgDigest, BigInteger.Multiply(this.privatekey, r)), n)),n);
+            s = ec.mod(BigInteger.Multiply(ec.modInverse(k, n), ec.mod(BigInteger.Add(this.decMsgDigest, BigInteger.Multiply(this.privatekey, r)), n)), n);
 
             if (s.Equals(BigInteger.Zero))
             {
