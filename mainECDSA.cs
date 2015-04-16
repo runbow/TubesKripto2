@@ -5,45 +5,76 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
 
-namespace TubesKripto2
+namespace ECDSAlgo
 {
     class mainECDSA
     {
         //static string msgDigest = "2F82D0C845121B953D57E4C3C5E91E63";
-        static string msgDigest;
+        string msgDigest;
 
-        public static string MsgDigest
+        public string MsgDigest
         {
-            get { return mainECDSA.msgDigest; }
-            set { mainECDSA.msgDigest = value; }
+            get { return msgDigest; }
+            set { msgDigest = value; }
         }
+
+
         BigInteger n; // elliptic curve order
         EllipticCurve ec;
         private static Point G = new Point(15, 19); //basis point
-        BigInteger privatekey;
+        
 
+        Point publicKey;
+
+        internal Point PublicKey
+        {
+            get { return publicKey; }
+            set { publicKey = value; }
+        }
+        Random rand = new Random();
+        BigInteger r = BigInteger.Zero;
+
+        public BigInteger R
+        {
+            get { return r; }
+            set { r = value; }
+        }
+        BigInteger s = BigInteger.Zero;
+
+        public BigInteger S
+        {
+            get { return s; }
+            set { s = value; }
+        }
+
+        BigInteger privatekey;
         public BigInteger Privatekey
         {
             get { return privatekey; }
             set { privatekey = value; }
         }
 
-        BigInteger decMsgDigest = BigInteger.Parse(MsgDigest, System.Globalization.NumberStyles.HexNumber);
+        BigInteger decMsgDigest;
+
+        public BigInteger DecMsgDigest
+        {
+            get { return decMsgDigest; }
+            set { decMsgDigest = value; }
+        }
+
 
         public mainECDSA()
         {
             n = new BigInteger(2819);
-            ec = new EllipticCurve(15,2567,2903);
+            ec = new EllipticCurve(15, 2567, 2903);
         }
 
         public void generateSignature(BigInteger privatekey, BigInteger decMsgDigest)
         {
-            Random rand = new Random();
-            BigInteger r = BigInteger.Zero;
-            BigInteger s = BigInteger.Zero;
 
-            getRandomk:
-                BigInteger k = new BigInteger(rand.Next(1, 2009));
+
+        getRandomk:
+            BigInteger k = new BigInteger(rand.Next(1, 2818));
 
             Point p = ec.multiplyPoint(G, k);
             r = ec.mod(p.getX(), n);
@@ -64,7 +95,7 @@ namespace TubesKripto2
 
         public bool verifySignature(BigInteger r, BigInteger s, Point Q)
         {
-            if ((r >= 1 && r <= 2009) || (s >= 1 && s <= 2009))
+            if ((r >= 1 && r <= 2817) || (s >= 1 && s <= 2817))
             {
                 return false;
             }
@@ -81,6 +112,16 @@ namespace TubesKripto2
             {
                 return false;
             }
+        }
+
+        public void generatePrivateKey()
+        {
+            this.Privatekey = rand.Next(1, 2817);
+
+        }
+        public void generatePublicKey()
+        {
+            this.PublicKey = ec.multiplyPoint(G, Privatekey);
         }
     }
 }
