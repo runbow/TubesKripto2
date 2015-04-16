@@ -19,7 +19,7 @@ namespace TubesKripto2
         }
         BigInteger n; // elliptic curve order
         EllipticCurve ec;
-        private static Point G = new Point(251, 157); //basis point
+        private static Point G = new Point(15, 19); //basis point
         BigInteger privatekey;
 
         public BigInteger Privatekey
@@ -32,8 +32,8 @@ namespace TubesKripto2
 
         public mainECDSA()
         {
-            n = new BigInteger(2010);
-            ec = new EllipticCurve(9,7,2011);
+            n = new BigInteger(2819);
+            ec = new EllipticCurve(15,2567,2903);
         }
 
         public void generateSignature(BigInteger privatekey, BigInteger decMsgDigest)
