@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
 
-namespace ECDSAlgo
+namespace TubesKripto2
 {
     class mainECDSA
     {
@@ -64,6 +64,11 @@ namespace ECDSAlgo
             set { decMsgDigest = value; }
         }
 
+        public BigInteger mdToDecimal(string md)
+        {
+            BigInteger decMD = BigInteger.Parse(md, System.Globalization.NumberStyles.HexNumber);
+            return decMD;
+        }
 
         public mainECDSA()
         {
@@ -86,7 +91,7 @@ namespace ECDSAlgo
                 goto getRandomk;
             }
 
-            s = BigInteger.Multiply(ec.modInverse(k, n), ec.mod(BigInteger.Add(this.decMsgDigest, BigInteger.Multiply(this.privatekey, r)), n));
+            s = ec.mod(BigInteger.Multiply(ec.modInverse(k, n), ec.mod(BigInteger.Add(this.decMsgDigest, BigInteger.Multiply(this.privatekey, r)), n)),n);
 
             if (s.Equals(BigInteger.Zero))
             {
@@ -97,16 +102,16 @@ namespace ECDSAlgo
 
         public bool verifySignature()
         {
-            if ((this.r >= 1 && this.r <= 2817) || (this.s >= 1 && this.s <= 2817))
+            if (r < 1 || r > 2817 || s < 1 || s > 2817)
             {
                 return false;
             }
 
-            BigInteger w = ec.modInverse(this.s, n);
+            BigInteger w = ec.modInverse(s, n);
             BigInteger u1 = ec.mod(BigInteger.Multiply(decMsgDigest, w), n);
-            BigInteger u2 = ec.mod(BigInteger.Multiply(this.r, w), n);
-            Point p = ec.addPoint(ec.multiplyPoint(G, u1), ec.multiplyPoint(this.Q, u2));
-            if (p.getX().Equals(ec.mod(this.r, n)))
+            BigInteger u2 = ec.mod(BigInteger.Multiply(r, w), n);
+            Point p = ec.addPoint(ec.multiplyPoint(G, u1), ec.multiplyPoint(this.PublicKey, u2));
+            if (p.getX().Equals(ec.mod(r, n)))
             {
                 return true;
             }
