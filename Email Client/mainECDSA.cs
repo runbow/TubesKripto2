@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Numerics;
 
-namespace TubesKripto2
+namespace Email_Client
 {
     class mainECDSA
     {
-        //static string msgDigest = "2F82D0C845121B953D57E4C3C5E91E63";
         string msgDigest;
 
         public string MsgDigest
@@ -23,7 +23,7 @@ namespace TubesKripto2
         private static Point G = new Point(15, 19); //basis point
 
 
-        Point publicKey = new Point(BigInteger.Zero,BigInteger.Zero);
+        Point publicKey = new Point(BigInteger.Zero, BigInteger.Zero);
 
         internal Point PublicKey
         {

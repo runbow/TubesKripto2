@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
+using System.Linq;
 using System.Numerics;
 
-namespace TubesKripto2
+namespace Email_Client
 {
     class Point
     {
@@ -12,14 +12,14 @@ namespace TubesKripto2
 
         public BigInteger X
         {
-            
+
             set { x = value; }
         }
         BigInteger y;
 
         public BigInteger Y
         {
-            
+
             set { y = value; }
         }
 
