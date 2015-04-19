@@ -88,10 +88,10 @@ namespace Email_Client
                     tempTextColor = "#" + Box.SelectionColor.R.ToString("X2") + Box.SelectionColor.G.ToString("X2") + Box.SelectionColor.B.ToString("X2");
                     tempBackgroundColor = "#" + Box.SelectionBackColor.R.ToString("X2") + Box.SelectionBackColor.G.ToString("X2") + Box.SelectionBackColor.B.ToString("X2");
                     // Check/implement any changes in style
-                    if (!(tempTextColor.Equals(textColour, StringComparison.OrdinalIgnoreCase)) || (!(tempBackgroundColor.Equals(backgroundColour, StringComparison.OrdinalIgnoreCase))) || (!(Box.SelectionFont.FontFamily.Name.Equals(font, StringComparison.OrdinalIgnoreCase))) || (Box.SelectionFont.Size != size))
-                    {
-                        HTML += "</span><span style=\"font-family: " + Box.SelectionFont.FontFamily.Name + "; font-size: " + Box.SelectionFont.Size + "pt; color: " + tempTextColor + "; background-color: " + tempBackgroundColor + "\">";
-                    }
+                    //if (!(tempTextColor.Equals(textColour, StringComparison.OrdinalIgnoreCase)) || (!(tempBackgroundColor.Equals(backgroundColour, StringComparison.OrdinalIgnoreCase))) || (!(Box.SelectionFont.FontFamily.Name.Equals(font, StringComparison.OrdinalIgnoreCase))) || (Box.SelectionFont.Size != size))
+                    //{
+                    //    HTML += "</span><span style=\"font-family: " + Box.SelectionFont.FontFamily.Name + "; font-size: " + Box.SelectionFont.Size + "pt; color: " + tempTextColor + "; background-color: " + tempBackgroundColor + "\">";
+                    //}
 
                     // Check for bold changes
                     if (Box.SelectionFont.Bold != bold)

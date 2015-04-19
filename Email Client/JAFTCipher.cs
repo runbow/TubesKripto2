@@ -492,7 +492,7 @@ namespace Email_Client
             return chip;
         }
 
-        public static String decrypt1(String chip, String kunci)
+        public String decrypt1(String chip, String kunci)
         {
             String plain = "";//plaintext
             chip = FromHexString(chip);

@@ -117,6 +117,10 @@ namespace Email_Client
             this.keyBox = new System.Windows.Forms.TextBox();
             this.DecryptButton = new System.Windows.Forms.Button();
             this.verifySignatureButton = new System.Windows.Forms.Button();
+            this.decryptBox = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.publicKeyVer1 = new System.Windows.Forms.TextBox();
+            this.publicKeyVer2 = new System.Windows.Forms.TextBox();
             this.EmailTab.SuspendLayout();
             this.CheckMailTab.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -143,6 +147,10 @@ namespace Email_Client
             // 
             // CheckMailTab
             // 
+            this.CheckMailTab.Controls.Add(this.publicKeyVer2);
+            this.CheckMailTab.Controls.Add(this.publicKeyVer1);
+            this.CheckMailTab.Controls.Add(this.label21);
+            this.CheckMailTab.Controls.Add(this.decryptBox);
             this.CheckMailTab.Controls.Add(this.verifySignatureButton);
             this.CheckMailTab.Controls.Add(this.DecryptButton);
             this.CheckMailTab.Controls.Add(this.groupBox3);
@@ -1078,21 +1086,53 @@ namespace Email_Client
             // 
             // DecryptButton
             // 
-            this.DecryptButton.Location = new System.Drawing.Point(152, 496);
+            this.DecryptButton.Location = new System.Drawing.Point(152, 516);
             this.DecryptButton.Name = "DecryptButton";
             this.DecryptButton.Size = new System.Drawing.Size(117, 23);
             this.DecryptButton.TabIndex = 4;
             this.DecryptButton.Text = "Decrypt Message";
             this.DecryptButton.UseVisualStyleBackColor = true;
+            this.DecryptButton.Click += new System.EventHandler(this.DecryptButton_Click);
             // 
             // verifySignatureButton
             // 
-            this.verifySignatureButton.Location = new System.Drawing.Point(327, 496);
+            this.verifySignatureButton.Location = new System.Drawing.Point(368, 518);
             this.verifySignatureButton.Name = "verifySignatureButton";
             this.verifySignatureButton.Size = new System.Drawing.Size(132, 23);
             this.verifySignatureButton.TabIndex = 5;
             this.verifySignatureButton.Text = "Verify Signature";
             this.verifySignatureButton.UseVisualStyleBackColor = true;
+            this.verifySignatureButton.Click += new System.EventHandler(this.verifySignatureButton_Click);
+            // 
+            // decryptBox
+            // 
+            this.decryptBox.Location = new System.Drawing.Point(160, 484);
+            this.decryptBox.Name = "decryptBox";
+            this.decryptBox.Size = new System.Drawing.Size(100, 21);
+            this.decryptBox.TabIndex = 6;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(54, 484);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(86, 15);
+            this.label21.TabIndex = 7;
+            this.label21.Text = "Key for decrypt";
+            // 
+            // publicKeyVer1
+            // 
+            this.publicKeyVer1.Location = new System.Drawing.Point(325, 483);
+            this.publicKeyVer1.Name = "publicKeyVer1";
+            this.publicKeyVer1.Size = new System.Drawing.Size(100, 21);
+            this.publicKeyVer1.TabIndex = 8;
+            // 
+            // publicKeyVer2
+            // 
+            this.publicKeyVer2.Location = new System.Drawing.Point(442, 483);
+            this.publicKeyVer2.Name = "publicKeyVer2";
+            this.publicKeyVer2.Size = new System.Drawing.Size(100, 21);
+            this.publicKeyVer2.TabIndex = 9;
             // 
             // EmailClient
             // 
@@ -1109,6 +1149,7 @@ namespace Email_Client
             this.Text = "Email Client";
             this.EmailTab.ResumeLayout(false);
             this.CheckMailTab.ResumeLayout(false);
+            this.CheckMailTab.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -1222,6 +1263,10 @@ namespace Email_Client
         private System.Windows.Forms.TextBox keyBox;
         private System.Windows.Forms.Button verifySignatureButton;
         private System.Windows.Forms.Button DecryptButton;
+        private System.Windows.Forms.TextBox publicKeyVer2;
+        private System.Windows.Forms.TextBox publicKeyVer1;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox decryptBox;
     }
 }
 
