@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Diagnostics;
 
 namespace Email_Client
 {
@@ -33,6 +34,7 @@ namespace Email_Client
                     i += nextChunk;
                 }
 
+                Debug.WriteLine(data.ToString());
                 //data.Append("\r\n");
                 return data.ToString();
 

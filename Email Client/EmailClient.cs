@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Collections;
 using System.IO;
 using System.Threading;
+using System.Numerics;
 
 namespace Email_Client
 {
@@ -22,6 +23,7 @@ namespace Email_Client
         int msg_id = 0;
         ArrayList attached_file_names;
 
+        mainECDSA mECDSA = new mainECDSA();
 
         public EmailClient()
         {
@@ -139,7 +141,7 @@ namespace Email_Client
                         }
                         else
                         {
-                            MessageBox.Show(this, "Recipients' email address is not in the correct format, in \"To: \" field.", "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Recipients' email address is not in the correct format, in \"To: \" field.");
                             return;
                         }
                     }
@@ -148,7 +150,7 @@ namespace Email_Client
                     {
                         if (!(this.RecipientsEmailValidation(this.Cc.Text)))
                         {
-                            MessageBox.Show(this, "Recipients' email address is not in the correct format, in \"Cc: \" field.", "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Recipients' email address is not in the correct format, in \"Cc: \" field.");
                             return;
                         }
                         else
@@ -161,7 +163,7 @@ namespace Email_Client
                     {
                         if (!(this.RecipientsEmailValidation(this.Bcc.Text)))
                         {
-                            MessageBox.Show(this, "Recipients' email address is not in the correct format, in \"Bcc: \" field.", "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Recipients' email address is not in the correct format, in \"Bcc: \" field.");
                             return;
                         }
                         else
@@ -173,8 +175,40 @@ namespace Email_Client
                     {
                         if (isRecipient == true)
                         {
+                            // choose option which to add signature
+                            if (signatureBox.Checked)
+                            {
+                                // generate hash
+                                SHA1 sha = new SHA1();
+                                String pesan = this.MailMessages.ToString();
+
+                                String hash = sha.encode(pesan);
+
+                                // add signature
+                                mECDSA.MsgDigest = hash;
+                                mECDSA.DecMsgDigest = mECDSA.mdToDecimal(hash);
+
+                                mECDSA.Privatekey = BigInteger.Parse(privateKeyTeks.Text);
+
+                                mECDSA.generateSignature();
+
+                                pesan += "\n\n\n<signature begin>\n";
+                                pesan += mECDSA.R.ToString("X") +"\n";
+                                pesan += mECDSA.S.ToString("X") + "\n";
+                                pesan += "<signature end>";
+
+                                this.MailMessage.Text = hash;
+                            }
+
                             Rtf2Html rtf = new Rtf2Html();
                             string Html = rtf.ConvertRtfToHtml(this.MailMessage);
+
+                            if (EncryptBox.Checked)
+                            {
+                                // encrypt with block cipher
+                                JAFTCipher jf = new JAFTCipher();
+                                Html = jf.encrypt1(Html, keyBox.Text);
+                            }
 
                             MailMessage mail_message = new MailMessage();
                             mail_message.From = this.From.Text;
@@ -197,12 +231,12 @@ namespace Email_Client
                     }
                     else
                     {
-                        MessageBox.Show(this, "You must connect to the internet.", "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("You must connect to the internet.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show(this, "Sender email address is not in the correct format.", "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Sender email address is not in the correct format.");
                 }
             }
         }
@@ -588,7 +622,7 @@ namespace Email_Client
                     }
                     catch (Pop3ClientException err)
                     {
-                        MessageBox.Show(this, err.ErrorMessage, "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(err.ErrorMessage);
                     }
                 }
             }
@@ -644,11 +678,11 @@ namespace Email_Client
                         this.PopAttachments.Items.Clear();
                         this.PopMessage.DocumentText = "<html></html>";
                     }
-                    MessageBox.Show(this, "Message having id " + index + " is deleted.", "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Message having id " + index + " is deleted.");
                 }
                 catch (Pop3ClientException err)
                 {
-                    MessageBox.Show(this, err.ErrorMessage, "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(err.ErrorMessage);
                 }
             }
         }
@@ -678,7 +712,7 @@ namespace Email_Client
                 byte[] decoded_data = MailDecoder.ConvertFromBase64String(content);
                 File.WriteAllBytes(obj.FileName, decoded_data);
                 
-                MessageBox.Show(this, "File \"" + Path.GetFileName(obj.FileName) + "\" has saved.", "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("File \"" + Path.GetFileName(obj.FileName) + "\" has saved.", "Email Client");
             }
             
         }
@@ -890,12 +924,12 @@ namespace Email_Client
                 else
                 {
                     this.UpdateStatusBar("Email Client");
-                    MessageBox.Show(this, "No email message exists in the inbox!.", "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("No email message exists in the inbox!.");
                 }
             }
             catch (SmtpClientException err)
             {
-                MessageBox.Show(this, err.ErrorMessage, "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(err.ErrorMessage);
                 this.UpdateStatusBar("Email Client");
                 this.EnableDisableConnectButton(true);
                 this.EnableDisableDisconnectButton(false);
@@ -950,7 +984,7 @@ namespace Email_Client
             }
             catch (Pop3ClientException err)
             {
-                MessageBox.Show(this, err.ErrorMessage, "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(err.ErrorMessage);
             }
         }
 
@@ -958,22 +992,22 @@ namespace Email_Client
         {
             if (pop_server.Equals(""))
             {
-                MessageBox.Show(this, "You must provide pop server address.", "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("You must provide pop server address.");
                 return false;
             }
             else if (pop_port.Equals(""))
             {
-                MessageBox.Show(this, "You must provide pop port number.", "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("You must provide pop port number.");
                 return false;
             }
             else if (user_name.Equals(""))
             {
-                MessageBox.Show(this, "You must provide username.", "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("You must provide username.");
                 return false;
             }
             else if (password.Equals(""))
             {
-                MessageBox.Show(this, "You must provide password.", "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("You must provide password.");
                 return false;
             }
 
@@ -1052,7 +1086,7 @@ namespace Email_Client
             }
             catch (SmtpClientException obj)
             {
-                MessageBox.Show(this, obj.ErrorMessage, "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show(this, obj.ErrorMessage, "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.EnableDisableSendButton(true);
                 this.ProgressLabel.Text = "Email Client";
             }
@@ -1062,27 +1096,27 @@ namespace Email_Client
         {
             if (smtp_server.Equals(""))
             {
-                MessageBox.Show(this, "You must provide smtp server address.", "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("You must provide smtp server address.");
                 return false;
             }
             else if (smtp_port.Equals(""))
             {
-                MessageBox.Show(this, "You must provide smtp port number.", "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("You must provide smtp port number.");
                 return false;
             }
             else if (user_name.Equals(""))
             {
-                MessageBox.Show(this, "You must provide username.", "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("You must provide username.");
                 return false;
             }
             else if (password.Equals(""))
             {
-                MessageBox.Show(this, "You must provide password.", "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("You must provide password.");
                 return false;
             }
             else if (from.Equals(""))
             {
-                MessageBox.Show(this, "You must provide sender email address.", "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("You must provide sender email address.");
                 return false;
             }
             else if ((!(to.Equals(""))) || (!(cc.Equals(""))) || (!(bcc.Equals(""))))
@@ -1091,7 +1125,7 @@ namespace Email_Client
             }
             else if (to.Equals("") && cc.Equals("") && bcc.Equals(""))
             {
-                MessageBox.Show(this, "You must provide recipient email address.", "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("You must provide recipient email address.");
                 return false;
             }
             
@@ -1147,7 +1181,7 @@ namespace Email_Client
                     style |= System.Drawing.FontStyle.Underline;
                 }
 
-                this.MailMessage.SelectionFont = new Font(((ToolStripComboBox)this.FormattingToolStrip.Items[0]).Text, Convert.ToSingle(((ToolStripComboBox)this.FormattingToolStrip.Items[1]).Text), style);
+                //this.MailMessage.SelectionFont = new Font(((ToolStripComboBox)this.FormattingToolStrip.Items[0]).Text, Convert.ToSingle(((ToolStripComboBox)this.FormattingToolStrip.Items[1]).Text), style);
                 this.MailMessage.Focus();
             }
         }
@@ -1180,6 +1214,49 @@ namespace Email_Client
             }
 
             return bmp;
+        }
+
+        private void generatePrivateKeyButton_Click(object sender, EventArgs e)
+        {
+            mECDSA.generatePrivateKey();
+            privateKeyTeks.Text = mECDSA.Privatekey.ToString();
+        }
+
+        private void generatePublicKeyButton_Click(object sender, EventArgs e)
+        {
+            mECDSA.Privatekey = BigInteger.Parse(privateKeyTeks.Text);
+            mECDSA.generatePublicKey();
+            publicKey1.Text = mECDSA.PublicKey.getX().ToString();
+            publicKey2.Text = mECDSA.PublicKey.getY().ToString();
+        }
+
+        private void EncryptBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (EncryptBox.Checked)
+            {
+                keyBox.Enabled = true;
+            }
+            else keyBox.Enabled = false;
+        }
+
+        private void signatureBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (signatureBox.Checked)
+            {
+                privateKeyTeks.Enabled = true;
+                generatePrivateKeyButton.Enabled = true;
+                generatePublicKeyButton.Enabled = true;
+                publicKey1.Enabled = true;
+                publicKey2.Enabled = true;
+            }
+            else
+            {
+                privateKeyTeks.Enabled = false;
+                generatePrivateKeyButton.Enabled = false;
+                generatePublicKeyButton.Enabled = false;
+                publicKey1.Enabled = false;
+                publicKey2.Enabled = false;
+            }
         }
 
     }

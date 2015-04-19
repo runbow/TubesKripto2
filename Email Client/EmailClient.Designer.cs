@@ -34,8 +34,6 @@ namespace Email_Client
             this.CheckMailTab = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.PopMessage = new System.Windows.Forms.WebBrowser();
-            this.SaveAttachmentToolStrip = new System.Windows.Forms.ToolStrip();
-            this.DownloadAttachment = new System.Windows.Forms.ToolStripButton();
             this.PopAttachments = new System.Windows.Forms.ListView();
             this.images = new System.Windows.Forms.ImageList(this.components);
             this.label20 = new System.Windows.Forms.Label();
@@ -48,10 +46,10 @@ namespace Email_Client
             this.label16 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.MailMessages = new System.Windows.Forms.ListView();
-            this.Sender = new System.Windows.Forms.ColumnHeader();
-            this.SubjectList = new System.Windows.Forms.ColumnHeader();
-            this.Date = new System.Windows.Forms.ColumnHeader();
-            this.Size = new System.Windows.Forms.ColumnHeader();
+            this.Sender = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.SubjectList = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Size = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Pop3LogOn = new System.Windows.Forms.GroupBox();
             this.Disconnect = new System.Windows.Forms.Button();
             this.Connect = new System.Windows.Forms.Button();
@@ -69,19 +67,6 @@ namespace Email_Client
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
             this.MailMessage = new System.Windows.Forms.RichTextBox();
-            this.FormattingToolStrip = new System.Windows.Forms.ToolStrip();
-            this.FontStyle = new System.Windows.Forms.ToolStripComboBox();
-            this.FontSize = new System.Windows.Forms.ToolStripComboBox();
-            this.Separator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.Bold = new System.Windows.Forms.ToolStripButton();
-            this.Italic = new System.Windows.Forms.ToolStripButton();
-            this.Underline = new System.Windows.Forms.ToolStripButton();
-            this.Separator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.FontColor = new System.Windows.Forms.ToolStripButton();
-            this.FontBackgroundColor = new System.Windows.Forms.ToolStripButton();
-            this.AttachmentToolStrip = new System.Windows.Forms.ToolStrip();
-            this.AddAttachment = new System.Windows.Forms.ToolStripButton();
-            this.DeleteAttachment = new System.Windows.Forms.ToolStripButton();
             this.Attachments = new System.Windows.Forms.ListView();
             this.label10 = new System.Windows.Forms.Label();
             this.Subject = new System.Windows.Forms.TextBox();
@@ -102,23 +87,48 @@ namespace Email_Client
             this.SmtpPort = new System.Windows.Forms.TextBox();
             this.SmtpServer = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.EmailToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.EmailTimer = new System.Windows.Forms.Timer(this.components);
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.ProgressLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.EncryptBox = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.signatureBox = new System.Windows.Forms.CheckBox();
+            this.generatePrivateKeyButton = new System.Windows.Forms.Button();
+            this.generatePublicKeyButton = new System.Windows.Forms.Button();
+            this.privateKeyTeks = new System.Windows.Forms.TextBox();
+            this.publicKey1 = new System.Windows.Forms.TextBox();
+            this.publicKey2 = new System.Windows.Forms.TextBox();
+            this.SaveAttachmentToolStrip = new System.Windows.Forms.ToolStrip();
+            this.DownloadAttachment = new System.Windows.Forms.ToolStripButton();
+            this.FormattingToolStrip = new System.Windows.Forms.ToolStrip();
+            this.FontStyle = new System.Windows.Forms.ToolStripComboBox();
+            this.FontSize = new System.Windows.Forms.ToolStripComboBox();
+            this.Separator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.Bold = new System.Windows.Forms.ToolStripButton();
+            this.Italic = new System.Windows.Forms.ToolStripButton();
+            this.Underline = new System.Windows.Forms.ToolStripButton();
+            this.Separator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.FontColor = new System.Windows.Forms.ToolStripButton();
+            this.FontBackgroundColor = new System.Windows.Forms.ToolStripButton();
+            this.AttachmentToolStrip = new System.Windows.Forms.ToolStrip();
+            this.AddAttachment = new System.Windows.Forms.ToolStripButton();
+            this.DeleteAttachment = new System.Windows.Forms.ToolStripButton();
+            this.keyBox = new System.Windows.Forms.TextBox();
+            this.DecryptButton = new System.Windows.Forms.Button();
+            this.verifySignatureButton = new System.Windows.Forms.Button();
             this.EmailTab.SuspendLayout();
             this.CheckMailTab.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.SaveAttachmentToolStrip.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.Pop3LogOn.SuspendLayout();
             this.ComposeMailTab.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.FormattingToolStrip.SuspendLayout();
-            this.AttachmentToolStrip.SuspendLayout();
             this.SmtpLogOn.SuspendLayout();
             this.statusStrip.SuspendLayout();
+            this.SaveAttachmentToolStrip.SuspendLayout();
+            this.FormattingToolStrip.SuspendLayout();
+            this.AttachmentToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // EmailTab
@@ -128,11 +138,13 @@ namespace Email_Client
             this.EmailTab.Location = new System.Drawing.Point(26, 8);
             this.EmailTab.Name = "EmailTab";
             this.EmailTab.SelectedIndex = 0;
-            this.EmailTab.Size = new System.Drawing.Size(656, 507);
+            this.EmailTab.Size = new System.Drawing.Size(656, 582);
             this.EmailTab.TabIndex = 0;
             // 
             // CheckMailTab
             // 
+            this.CheckMailTab.Controls.Add(this.verifySignatureButton);
+            this.CheckMailTab.Controls.Add(this.DecryptButton);
             this.CheckMailTab.Controls.Add(this.groupBox3);
             this.CheckMailTab.Controls.Add(this.groupBox2);
             this.CheckMailTab.Controls.Add(this.Pop3LogOn);
@@ -140,7 +152,7 @@ namespace Email_Client
             this.CheckMailTab.Location = new System.Drawing.Point(4, 22);
             this.CheckMailTab.Name = "CheckMailTab";
             this.CheckMailTab.Padding = new System.Windows.Forms.Padding(3);
-            this.CheckMailTab.Size = new System.Drawing.Size(648, 481);
+            this.CheckMailTab.Size = new System.Drawing.Size(648, 556);
             this.CheckMailTab.TabIndex = 0;
             this.CheckMailTab.Text = "Check Mail";
             this.CheckMailTab.ToolTipText = "Check Email";
@@ -175,30 +187,6 @@ namespace Email_Client
             this.PopMessage.Name = "PopMessage";
             this.PopMessage.Size = new System.Drawing.Size(482, 78);
             this.PopMessage.TabIndex = 11;
-            // 
-            // SaveAttachmentToolStrip
-            // 
-            this.SaveAttachmentToolStrip.AutoSize = false;
-            this.SaveAttachmentToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.SaveAttachmentToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.SaveAttachmentToolStrip.Renderer = new ToolBarRenderer();
-            this.SaveAttachmentToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.DownloadAttachment});
-            this.SaveAttachmentToolStrip.Location = new System.Drawing.Point(546, 14);
-            this.SaveAttachmentToolStrip.Name = "SaveAttachmentToolStrip";
-            this.SaveAttachmentToolStrip.Size = new System.Drawing.Size(43, 25);
-            this.SaveAttachmentToolStrip.TabIndex = 10;
-            // 
-            // DownloadAttachment
-            // 
-            this.DownloadAttachment.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.DownloadAttachment.Enabled = false;
-            this.DownloadAttachment.Image = global::Email_Client.Properties.Resources.DownloadFile;
-            this.DownloadAttachment.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.DownloadAttachment.Name = "DownloadAttachment";
-            this.DownloadAttachment.Size = new System.Drawing.Size(23, 22);
-            this.DownloadAttachment.ToolTipText = "Save an attachment";
-            this.DownloadAttachment.Click += new System.EventHandler(this.DownloadAttachment_Click);
             // 
             // PopAttachments
             // 
@@ -322,8 +310,8 @@ namespace Email_Client
             // 
             // MailMessages
             // 
-            this.MailMessages.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.MailMessages.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.MailMessages.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Sender,
             this.SubjectList,
@@ -339,8 +327,8 @@ namespace Email_Client
             this.MailMessages.TabIndex = 0;
             this.MailMessages.UseCompatibleStateImageBehavior = false;
             this.MailMessages.View = System.Windows.Forms.View.Details;
-            this.MailMessages.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MailMessages_MouseClick);
             this.MailMessages.SelectedIndexChanged += new System.EventHandler(this.MailMessages_SelectedIndexChanged);
+            this.MailMessages.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MailMessages_MouseClick);
             // 
             // Sender
             // 
@@ -492,6 +480,14 @@ namespace Email_Client
             // 
             // ComposeMailTab
             // 
+            this.ComposeMailTab.Controls.Add(this.keyBox);
+            this.ComposeMailTab.Controls.Add(this.publicKey2);
+            this.ComposeMailTab.Controls.Add(this.publicKey1);
+            this.ComposeMailTab.Controls.Add(this.privateKeyTeks);
+            this.ComposeMailTab.Controls.Add(this.generatePublicKeyButton);
+            this.ComposeMailTab.Controls.Add(this.generatePrivateKeyButton);
+            this.ComposeMailTab.Controls.Add(this.signatureBox);
+            this.ComposeMailTab.Controls.Add(this.EncryptBox);
             this.ComposeMailTab.Controls.Add(this.SmtpClear);
             this.ComposeMailTab.Controls.Add(this.Send);
             this.ComposeMailTab.Controls.Add(this.groupBox1);
@@ -500,7 +496,7 @@ namespace Email_Client
             this.ComposeMailTab.Location = new System.Drawing.Point(4, 22);
             this.ComposeMailTab.Name = "ComposeMailTab";
             this.ComposeMailTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ComposeMailTab.Size = new System.Drawing.Size(648, 481);
+            this.ComposeMailTab.Size = new System.Drawing.Size(648, 556);
             this.ComposeMailTab.TabIndex = 1;
             this.ComposeMailTab.Text = "Compose Mail";
             this.ComposeMailTab.ToolTipText = "Compose Email";
@@ -584,157 +580,6 @@ namespace Email_Client
             this.MailMessage.Text = "";
             this.EmailToolTip.SetToolTip(this.MailMessage, "Type message here");
             this.MailMessage.SelectionChanged += new System.EventHandler(this.MailMessage_SelectionChanged);
-            // 
-            // FormattingToolStrip
-            // 
-            this.FormattingToolStrip.AutoSize = false;
-            this.FormattingToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.FormattingToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.FormattingToolStrip.Renderer = new ToolBarRenderer();
-            this.FormattingToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.FontStyle,
-            this.FontSize,
-            this.Separator1,
-            this.Bold,
-            this.Italic,
-            this.Underline,
-            this.Separator2,
-            this.FontColor,
-            this.FontBackgroundColor});
-            this.FormattingToolStrip.Location = new System.Drawing.Point(89, 168);
-            this.FormattingToolStrip.Name = "FormattingToolStrip";
-            this.FormattingToolStrip.Size = new System.Drawing.Size(374, 25);
-            this.FormattingToolStrip.TabIndex = 13;
-            // 
-            // FontStyle
-            // 
-            this.FontStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.FontStyle.Items.AddRange(new object[] {
-            "Arial",
-            "Courier New",
-            "Times New Roman",
-            "Verdana"});
-            this.FontStyle.SelectedIndex = 0;
-            this.FontStyle.Name = "FontStyle";
-            this.FontStyle.Size = new System.Drawing.Size(150, 25);
-            this.FontStyle.Text = "Arial";
-            this.FontStyle.ToolTipText = "Font";
-            this.FontStyle.SelectedIndexChanged += new System.EventHandler(this.FontStyle_SelectedIndexChanged);
-            // 
-            // FontSize
-            // 
-            this.FontSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.FontSize.Items.AddRange(new object[] {
-            "8",
-            "10",
-            "12",
-            "14",
-            "18",
-            "24",
-            "32",
-            "36"});
-            this.FontSize.SelectedIndex = 1;
-            this.FontSize.Name = "FontSize";
-            this.FontSize.Size = new System.Drawing.Size(75, 25);
-            this.FontSize.Text = "10";
-            this.FontSize.ToolTipText = "Font Size";
-            this.FontSize.SelectedIndexChanged += new System.EventHandler(this.FontSize_SelectedIndexChanged);
-            // 
-            // Separator1
-            // 
-            this.Separator1.Name = "Separator1";
-            this.Separator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // Bold
-            // 
-            this.Bold.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Bold.Image = global::Email_Client.Properties.Resources.bold;
-            this.Bold.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Bold.Name = "Bold";
-            this.Bold.Size = new System.Drawing.Size(23, 22);
-            this.Bold.ToolTipText = "Bold";
-            this.Bold.Click += new System.EventHandler(this.Bold_Click);
-            // 
-            // Italic
-            // 
-            this.Italic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Italic.Image = global::Email_Client.Properties.Resources.italic;
-            this.Italic.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Italic.Name = "Italic";
-            this.Italic.Size = new System.Drawing.Size(23, 22);
-            this.Italic.ToolTipText = "Italic";
-            this.Italic.Click += new System.EventHandler(this.Italic_Click);
-            // 
-            // Underline
-            // 
-            this.Underline.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Underline.Image = global::Email_Client.Properties.Resources.underline;
-            this.Underline.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Underline.Name = "Underline";
-            this.Underline.Size = new System.Drawing.Size(23, 22);
-            this.Underline.ToolTipText = "Underline";
-            this.Underline.Click += new System.EventHandler(this.Underline_Click);
-            // 
-            // Separator2
-            // 
-            this.Separator2.Name = "Separator2";
-            this.Separator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // FontColor
-            // 
-            this.FontColor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.FontColor.Image = global::Email_Client.Properties.Resources.fontcolor;
-            this.FontColor.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.FontColor.Name = "FontColor";
-            this.FontColor.Size = new System.Drawing.Size(23, 22);
-            this.FontColor.ToolTipText = "Font Color";
-            this.FontColor.Click += new System.EventHandler(this.FontColor_Click);
-            // 
-            // FontBackgroundColor
-            // 
-            this.FontBackgroundColor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.FontBackgroundColor.Image = global::Email_Client.Properties.Resources.fontbackcolor;
-            this.FontBackgroundColor.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.FontBackgroundColor.Name = "FontBackgroundColor";
-            this.FontBackgroundColor.Size = new System.Drawing.Size(23, 22);
-            this.FontBackgroundColor.ToolTipText = "Font Background Color";
-            this.FontBackgroundColor.Click += new System.EventHandler(this.FontBackgroundColor_Click);
-            // 
-            // AttachmentToolStrip
-            // 
-            this.AttachmentToolStrip.AutoSize = false;
-            this.AttachmentToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.AttachmentToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.AttachmentToolStrip.Renderer = new ToolBarRenderer();
-            this.AttachmentToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.AddAttachment,
-            this.DeleteAttachment});
-            this.AttachmentToolStrip.Location = new System.Drawing.Point(455, 101);
-            this.AttachmentToolStrip.Name = "AttachmentToolStrip";
-            this.AttachmentToolStrip.Size = new System.Drawing.Size(65, 25);
-            this.AttachmentToolStrip.TabIndex = 12;
-            this.AttachmentToolStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.AttachmentToolStrip_ItemClicked);
-            // 
-            // AddAttachment
-            // 
-            this.AddAttachment.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.AddAttachment.Image = global::Email_Client.Properties.Resources.add;
-            this.AddAttachment.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.AddAttachment.Name = "AddAttachment";
-            this.AddAttachment.Size = new System.Drawing.Size(23, 22);
-            this.AddAttachment.Tag = "Add";
-            this.AddAttachment.ToolTipText = "Add an attachment";
-            // 
-            // DeleteAttachment
-            // 
-            this.DeleteAttachment.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.DeleteAttachment.Enabled = false;
-            this.DeleteAttachment.Image = global::Email_Client.Properties.Resources.delete;
-            this.DeleteAttachment.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.DeleteAttachment.Name = "DeleteAttachment";
-            this.DeleteAttachment.Size = new System.Drawing.Size(23, 22);
-            this.DeleteAttachment.Tag = "Delete";
-            this.DeleteAttachment.ToolTipText = "Remove an attachment";
             // 
             // Attachments
             // 
@@ -952,17 +797,6 @@ namespace Email_Client
             this.label2.TabIndex = 1;
             this.label2.Text = "Smtp Port :";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label1.Location = new System.Drawing.Point(16, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Smtp Server :";
-            // 
             // EmailTimer
             // 
             this.EmailTimer.Enabled = true;
@@ -975,7 +809,7 @@ namespace Email_Client
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ProgressLabel});
             this.statusStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.statusStrip.Location = new System.Drawing.Point(0, 525);
+            this.statusStrip.Location = new System.Drawing.Point(0, 593);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(706, 22);
             this.statusStrip.SizingGrip = false;
@@ -987,11 +821,284 @@ namespace Email_Client
             this.ProgressLabel.Size = new System.Drawing.Size(61, 17);
             this.ProgressLabel.Text = "Email Client";
             // 
+            // EncryptBox
+            // 
+            this.EncryptBox.AutoSize = true;
+            this.EncryptBox.Location = new System.Drawing.Point(27, 518);
+            this.EncryptBox.Name = "EncryptBox";
+            this.EncryptBox.Size = new System.Drawing.Size(120, 19);
+            this.EncryptBox.TabIndex = 4;
+            this.EncryptBox.Text = "Encrypt Message";
+            this.EncryptBox.UseVisualStyleBackColor = true;
+            this.EncryptBox.CheckedChanged += new System.EventHandler(this.EncryptBox_CheckedChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label1.Location = new System.Drawing.Point(16, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 15);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Smtp Server :";
+            // 
+            // signatureBox
+            // 
+            this.signatureBox.AutoSize = true;
+            this.signatureBox.Location = new System.Drawing.Point(27, 433);
+            this.signatureBox.Name = "signatureBox";
+            this.signatureBox.Size = new System.Drawing.Size(121, 19);
+            this.signatureBox.TabIndex = 5;
+            this.signatureBox.Text = "Enable Signature";
+            this.signatureBox.UseVisualStyleBackColor = true;
+            this.signatureBox.CheckedChanged += new System.EventHandler(this.signatureBox_CheckedChanged);
+            // 
+            // generatePrivateKeyButton
+            // 
+            this.generatePrivateKeyButton.Enabled = false;
+            this.generatePrivateKeyButton.Location = new System.Drawing.Point(27, 459);
+            this.generatePrivateKeyButton.Name = "generatePrivateKeyButton";
+            this.generatePrivateKeyButton.Size = new System.Drawing.Size(75, 23);
+            this.generatePrivateKeyButton.TabIndex = 6;
+            this.generatePrivateKeyButton.Text = "Private Key";
+            this.generatePrivateKeyButton.UseVisualStyleBackColor = true;
+            this.generatePrivateKeyButton.Click += new System.EventHandler(this.generatePrivateKeyButton_Click);
+            // 
+            // generatePublicKeyButton
+            // 
+            this.generatePublicKeyButton.Enabled = false;
+            this.generatePublicKeyButton.Location = new System.Drawing.Point(27, 489);
+            this.generatePublicKeyButton.Name = "generatePublicKeyButton";
+            this.generatePublicKeyButton.Size = new System.Drawing.Size(75, 23);
+            this.generatePublicKeyButton.TabIndex = 7;
+            this.generatePublicKeyButton.Text = "Public Key";
+            this.generatePublicKeyButton.UseVisualStyleBackColor = true;
+            this.generatePublicKeyButton.Click += new System.EventHandler(this.generatePublicKeyButton_Click);
+            // 
+            // privateKeyTeks
+            // 
+            this.privateKeyTeks.Enabled = false;
+            this.privateKeyTeks.Location = new System.Drawing.Point(116, 461);
+            this.privateKeyTeks.Name = "privateKeyTeks";
+            this.privateKeyTeks.Size = new System.Drawing.Size(100, 21);
+            this.privateKeyTeks.TabIndex = 8;
+            // 
+            // publicKey1
+            // 
+            this.publicKey1.Enabled = false;
+            this.publicKey1.Location = new System.Drawing.Point(116, 489);
+            this.publicKey1.Name = "publicKey1";
+            this.publicKey1.Size = new System.Drawing.Size(100, 21);
+            this.publicKey1.TabIndex = 9;
+            // 
+            // publicKey2
+            // 
+            this.publicKey2.Enabled = false;
+            this.publicKey2.Location = new System.Drawing.Point(223, 489);
+            this.publicKey2.Name = "publicKey2";
+            this.publicKey2.Size = new System.Drawing.Size(100, 21);
+            this.publicKey2.TabIndex = 10;
+            // 
+            // SaveAttachmentToolStrip
+            // 
+            this.SaveAttachmentToolStrip.AutoSize = false;
+            this.SaveAttachmentToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.SaveAttachmentToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.SaveAttachmentToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DownloadAttachment});
+            this.SaveAttachmentToolStrip.Location = new System.Drawing.Point(546, 14);
+            this.SaveAttachmentToolStrip.Name = "SaveAttachmentToolStrip";
+            this.SaveAttachmentToolStrip.Size = new System.Drawing.Size(43, 25);
+            this.SaveAttachmentToolStrip.TabIndex = 10;
+            // 
+            // DownloadAttachment
+            // 
+            this.DownloadAttachment.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.DownloadAttachment.Enabled = false;
+            this.DownloadAttachment.Image = global::Email_Client.Properties.Resources.DownloadFile;
+            this.DownloadAttachment.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DownloadAttachment.Name = "DownloadAttachment";
+            this.DownloadAttachment.Size = new System.Drawing.Size(23, 22);
+            this.DownloadAttachment.ToolTipText = "Save an attachment";
+            this.DownloadAttachment.Click += new System.EventHandler(this.DownloadAttachment_Click);
+            // 
+            // FormattingToolStrip
+            // 
+            this.FormattingToolStrip.AutoSize = false;
+            this.FormattingToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.FormattingToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.FormattingToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.FontStyle,
+            this.FontSize,
+            this.Separator1,
+            this.Bold,
+            this.Italic,
+            this.Underline,
+            this.Separator2,
+            this.FontColor,
+            this.FontBackgroundColor});
+            this.FormattingToolStrip.Location = new System.Drawing.Point(89, 168);
+            this.FormattingToolStrip.Name = "FormattingToolStrip";
+            this.FormattingToolStrip.Size = new System.Drawing.Size(374, 25);
+            this.FormattingToolStrip.TabIndex = 13;
+            // 
+            // FontStyle
+            // 
+            this.FontStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.FontStyle.Items.AddRange(new object[] {
+            "Arial",
+            "Courier New",
+            "Times New Roman",
+            "Verdana"});
+            this.FontStyle.Name = "FontStyle";
+            this.FontStyle.Size = new System.Drawing.Size(150, 25);
+            this.FontStyle.ToolTipText = "Font";
+            this.FontStyle.SelectedIndexChanged += new System.EventHandler(this.FontStyle_SelectedIndexChanged);
+            // 
+            // FontSize
+            // 
+            this.FontSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.FontSize.Items.AddRange(new object[] {
+            "8",
+            "10",
+            "12",
+            "14",
+            "18",
+            "24",
+            "32",
+            "36"});
+            this.FontSize.Name = "FontSize";
+            this.FontSize.Size = new System.Drawing.Size(75, 25);
+            this.FontSize.ToolTipText = "Font Size";
+            this.FontSize.SelectedIndexChanged += new System.EventHandler(this.FontSize_SelectedIndexChanged);
+            // 
+            // Separator1
+            // 
+            this.Separator1.Name = "Separator1";
+            this.Separator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // Bold
+            // 
+            this.Bold.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Bold.Image = global::Email_Client.Properties.Resources.bold;
+            this.Bold.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Bold.Name = "Bold";
+            this.Bold.Size = new System.Drawing.Size(23, 22);
+            this.Bold.ToolTipText = "Bold";
+            this.Bold.Click += new System.EventHandler(this.Bold_Click);
+            // 
+            // Italic
+            // 
+            this.Italic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Italic.Image = global::Email_Client.Properties.Resources.italic;
+            this.Italic.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Italic.Name = "Italic";
+            this.Italic.Size = new System.Drawing.Size(23, 22);
+            this.Italic.ToolTipText = "Italic";
+            this.Italic.Click += new System.EventHandler(this.Italic_Click);
+            // 
+            // Underline
+            // 
+            this.Underline.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Underline.Image = global::Email_Client.Properties.Resources.underline;
+            this.Underline.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Underline.Name = "Underline";
+            this.Underline.Size = new System.Drawing.Size(23, 22);
+            this.Underline.ToolTipText = "Underline";
+            this.Underline.Click += new System.EventHandler(this.Underline_Click);
+            // 
+            // Separator2
+            // 
+            this.Separator2.Name = "Separator2";
+            this.Separator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // FontColor
+            // 
+            this.FontColor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.FontColor.Image = global::Email_Client.Properties.Resources.fontcolor;
+            this.FontColor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.FontColor.Name = "FontColor";
+            this.FontColor.Size = new System.Drawing.Size(23, 22);
+            this.FontColor.ToolTipText = "Font Color";
+            this.FontColor.Click += new System.EventHandler(this.FontColor_Click);
+            // 
+            // FontBackgroundColor
+            // 
+            this.FontBackgroundColor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.FontBackgroundColor.Image = global::Email_Client.Properties.Resources.fontbackcolor;
+            this.FontBackgroundColor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.FontBackgroundColor.Name = "FontBackgroundColor";
+            this.FontBackgroundColor.Size = new System.Drawing.Size(23, 22);
+            this.FontBackgroundColor.ToolTipText = "Font Background Color";
+            this.FontBackgroundColor.Click += new System.EventHandler(this.FontBackgroundColor_Click);
+            // 
+            // AttachmentToolStrip
+            // 
+            this.AttachmentToolStrip.AutoSize = false;
+            this.AttachmentToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.AttachmentToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.AttachmentToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AddAttachment,
+            this.DeleteAttachment});
+            this.AttachmentToolStrip.Location = new System.Drawing.Point(455, 101);
+            this.AttachmentToolStrip.Name = "AttachmentToolStrip";
+            this.AttachmentToolStrip.Size = new System.Drawing.Size(65, 25);
+            this.AttachmentToolStrip.TabIndex = 12;
+            this.AttachmentToolStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.AttachmentToolStrip_ItemClicked);
+            // 
+            // AddAttachment
+            // 
+            this.AddAttachment.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.AddAttachment.Image = global::Email_Client.Properties.Resources.add;
+            this.AddAttachment.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.AddAttachment.Name = "AddAttachment";
+            this.AddAttachment.Size = new System.Drawing.Size(23, 22);
+            this.AddAttachment.Tag = "Add";
+            this.AddAttachment.ToolTipText = "Add an attachment";
+            // 
+            // DeleteAttachment
+            // 
+            this.DeleteAttachment.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.DeleteAttachment.Enabled = false;
+            this.DeleteAttachment.Image = global::Email_Client.Properties.Resources.delete;
+            this.DeleteAttachment.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DeleteAttachment.Name = "DeleteAttachment";
+            this.DeleteAttachment.Size = new System.Drawing.Size(23, 22);
+            this.DeleteAttachment.Tag = "Delete";
+            this.DeleteAttachment.ToolTipText = "Remove an attachment";
+            // 
+            // keyBox
+            // 
+            this.keyBox.Enabled = false;
+            this.keyBox.Location = new System.Drawing.Point(154, 518);
+            this.keyBox.Name = "keyBox";
+            this.keyBox.Size = new System.Drawing.Size(100, 21);
+            this.keyBox.TabIndex = 11;
+            // 
+            // DecryptButton
+            // 
+            this.DecryptButton.Location = new System.Drawing.Point(152, 496);
+            this.DecryptButton.Name = "DecryptButton";
+            this.DecryptButton.Size = new System.Drawing.Size(117, 23);
+            this.DecryptButton.TabIndex = 4;
+            this.DecryptButton.Text = "Decrypt Message";
+            this.DecryptButton.UseVisualStyleBackColor = true;
+            // 
+            // verifySignatureButton
+            // 
+            this.verifySignatureButton.Location = new System.Drawing.Point(327, 496);
+            this.verifySignatureButton.Name = "verifySignatureButton";
+            this.verifySignatureButton.Size = new System.Drawing.Size(132, 23);
+            this.verifySignatureButton.TabIndex = 5;
+            this.verifySignatureButton.Text = "Verify Signature";
+            this.verifySignatureButton.UseVisualStyleBackColor = true;
+            // 
             // EmailClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(706, 547);
+            this.ClientSize = new System.Drawing.Size(706, 615);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.EmailTab);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -1004,22 +1111,23 @@ namespace Email_Client
             this.CheckMailTab.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.SaveAttachmentToolStrip.ResumeLayout(false);
-            this.SaveAttachmentToolStrip.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.Pop3LogOn.ResumeLayout(false);
             this.Pop3LogOn.PerformLayout();
             this.ComposeMailTab.ResumeLayout(false);
+            this.ComposeMailTab.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.FormattingToolStrip.ResumeLayout(false);
-            this.FormattingToolStrip.PerformLayout();
-            this.AttachmentToolStrip.ResumeLayout(false);
-            this.AttachmentToolStrip.PerformLayout();
             this.SmtpLogOn.ResumeLayout(false);
             this.SmtpLogOn.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            this.SaveAttachmentToolStrip.ResumeLayout(false);
+            this.SaveAttachmentToolStrip.PerformLayout();
+            this.FormattingToolStrip.ResumeLayout(false);
+            this.FormattingToolStrip.PerformLayout();
+            this.AttachmentToolStrip.ResumeLayout(false);
+            this.AttachmentToolStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1032,7 +1140,6 @@ namespace Email_Client
         private System.Windows.Forms.TabPage ComposeMailTab;
         private System.Windows.Forms.GroupBox SmtpLogOn;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox SmtpPort;
         private System.Windows.Forms.TextBox SmtpServer;
         private System.Windows.Forms.Label label4;
@@ -1104,6 +1211,17 @@ namespace Email_Client
         private System.Windows.Forms.Button Connect;
         private System.Windows.Forms.Button Disconnect;
         private System.Windows.Forms.WebBrowser PopMessage;
+        private System.Windows.Forms.TextBox publicKey2;
+        private System.Windows.Forms.TextBox publicKey1;
+        private System.Windows.Forms.TextBox privateKeyTeks;
+        private System.Windows.Forms.Button generatePublicKeyButton;
+        private System.Windows.Forms.Button generatePrivateKeyButton;
+        private System.Windows.Forms.CheckBox signatureBox;
+        private System.Windows.Forms.CheckBox EncryptBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox keyBox;
+        private System.Windows.Forms.Button verifySignatureButton;
+        private System.Windows.Forms.Button DecryptButton;
     }
 }
 
