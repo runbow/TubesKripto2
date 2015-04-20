@@ -20,7 +20,7 @@ namespace Email_Client
 
         BigInteger n; // elliptic curve order
         EllipticCurve ec;
-        private static Point G = new Point(15, 19); //basis point
+        private static Point G = new Point(150, 25); //basis point
 
 
         Point publicKey = new Point(BigInteger.Zero, BigInteger.Zero);
@@ -71,8 +71,8 @@ namespace Email_Client
 
         public mainECDSA()
         {
-            n = new BigInteger(2819);
-            ec = new EllipticCurve(15, 2567, 2903);
+            n = new BigInteger(12444);
+            ec = new EllipticCurve(132, 1250, 12347);
         }
 
         public void generateSignature()
@@ -80,7 +80,7 @@ namespace Email_Client
 
 
         getRandomk:
-            BigInteger k = new BigInteger(rand.Next(1, 2818));
+            BigInteger k = new BigInteger(rand.Next(1, 12443));
 
             Point p = ec.multiplyPoint(G, k);
             r = ec.mod(p.getX(), n);
@@ -101,7 +101,7 @@ namespace Email_Client
 
         public bool verifySignature()
         {
-            if (r < 1 || r > 2817 || s < 1 || s > 2817)
+            if (r < 1 || r > 12443 || s < 1 || s > 12443)
             {
                 return false;
             }
@@ -122,7 +122,7 @@ namespace Email_Client
 
         public void generatePrivateKey()
         {
-            this.Privatekey = rand.Next(1, 2817);
+            this.Privatekey = rand.Next(1, 12443);
 
         }
         public void generatePublicKey()
